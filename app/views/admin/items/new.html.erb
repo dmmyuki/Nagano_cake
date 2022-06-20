@@ -1,0 +1,29 @@
+<section class="container">
+  <div class="row">
+    <div>
+      <h4>商品新規登録</h4>
+
+      <div>
+        <%= form_with model: @item, url: admin_items_path, method: :post do |f| %>
+          <%= f.label:image, "商品画像" %>
+          <%= f.file_field :image, accept: "image/*" %><br>
+
+          <%= f.label:name, "商品名" %>
+          <%= f.text_field:name, placeholder:"商品名" %><br>
+
+          <%= f.label:introduction, "商品説明" %>
+          <%= f.text_area:introduction, placeholder:"ここに説明文を記述します" %><br>
+
+          <%= f.label:genre_id, "ジャンル名" %>
+          <%= f.collection_select(:genre_id, @genres, :id, :name, {prompt: "選択してください"}) %><br>
+
+          <%= f.label:price, "税抜価格" %>
+          <%= f.text_field:price, placeholder:"1000" %>円<br>
+
+          <%= f.submit "新規登録", class:"btn btn-success" %>
+
+        <% end %>
+      </div>
+    </div>
+  </div>
+</section>

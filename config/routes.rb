@@ -4,6 +4,7 @@ Rails.application.routes.draw do
     root to: 'homes#top'
     resources:genres, only:[:index, :create, :edit, :update]
     resources:items, only:[:new, :index, :show, :edit, :create, :update]
+    resources:customers, only:[:index, :show, :edit, :update]
   end
 
   namespace :public do

@@ -34,4 +34,46 @@
     </div>
 
   </div>
+
+  <div class="row">
+    <div>
+      <table class="table table-borderless">
+        <thead class="table-light">
+          <tr>
+            <th scope="col">商品名</th>
+            <th scope="col">単価（税込）</th>
+            <th scope="col">数量</th>
+            <th scope="col">小計</th>
+          </tr>
+        </thead>
+        <tbody>
+        <% @order_details.each do |order_detail| %>
+          <tr>
+            <td><%= order_detail.item.name %></td>
+            <td><%= order_detail.tax_price.to_s(:delimited) %></td>
+            <td><%= order_detail.amount %></td>
+            <td><%= order_detail.subtotal.to_s(:delimited) %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+
+    <div>
+      <table>
+        <tr>
+          <th>商品合計</th>
+          <td><%=  %>円</td>
+        </tr>
+        <tr>
+          <th>送料</th>
+          <td><%= @order.postage.to_s(:delimited) %>円</td>
+        </tr>
+        <tr>
+          <th>請求金額合計</th>
+          <td><%= @order.charge.to_s(:delimited) %>円</td>
+        </tr>
+      </table>
+    </div>
+  </div>
 </section>

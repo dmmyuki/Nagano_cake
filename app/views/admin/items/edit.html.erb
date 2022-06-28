@@ -1,11 +1,9 @@
 <section class="container">
   <div class="row">
     <div class="col-lg-12">
-      <h4><span class="bg-light">商品編集</span></h4>
+      <h4 class="my-3"><span class="bg-light">商品編集</span></h4>
     </div>
-  </div>
 
-  <div class="row">
     <div class="col-lg-6 offset-lg-3">
       <%= form_with model: @item, url: admin_item_path(@item.id), method: :patch do |f| %>
       <table class="table table-borderless">
@@ -30,7 +28,10 @@
           <td><%= f.text_field:price %></td>
         </tr>
       </table>
-        <%= f.submit "変更を保存" %>
+
+      <div class="col-lg-6 offset-lg-3">
+        <%= f.submit "変更を保存", class:"btn btn-success" %>
+      </div>
       <% end %>
     </div>
   </div>

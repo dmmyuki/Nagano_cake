@@ -1,10 +1,8 @@
 <section class="container">
   <div class="row">
-    <div>
-      <h4><%= @customer.full_name %>さんの会員詳細</h4>
-    </div>
+    <div class="col-lg-8">
+      <h4 class="my-3"><span class="bg-light"><%= @customer.full_name %>さんの会員詳細</span></h4>
 
-    <div class="col-8 mx-auto">
       <table class="table table-borderless">
         <tr>
           <th>会員ID</th>
@@ -35,14 +33,10 @@
           <td><%= @customer.email %></td>
         </tr>
       </table>
-    </div>
 
-    <div>
-      <div>
-        <%= link_to "編集する", edit_admin_customer_path, class:"btn btn-success" %>
-      </div>
-      <div>
-      </div>
+    <div class="col-lg-10 offset-lg-1">
+      <%= link_to "編集する", edit_admin_customer_path, class:"btn btn-success" %>
+      <!--注文履歴一覧へのリンク-->
     </div>
 
   </div>

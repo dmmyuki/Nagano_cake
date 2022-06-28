@@ -1,9 +1,10 @@
 <section class="container">
   <div class="row">
-    <div>
-      <h4>ジャンル一覧・追加</h4>
+    <div class="col-lg-12">
+      <h4 class="my-3"><span class="bg-light">ジャンル一覧・追加</span></h4>
+    </div>
 
-      <div class="pull-left">
+      <div class="col-lg-8 my-5">
         <%= form_with model: @genre, url: admin_genres_path, method: :post do |f| %>
           <%= f.label:name, "ジャンル名" %>
           <%= f.text_field:name, placeholder:"ジャンル名" %>
@@ -11,10 +12,10 @@
         <% end %>
       </div>
 
-      <div>
-        <table style="opacity: 0.8;", width="300">
-          <thead style="background:grey">
-            <tr class="table-secondary">
+      <div class="col-lg-8">
+        <table class="table">
+          <thead>
+            <tr class="bg-light">
               <th>ジャンル</th>
               <th></th>
             </tr>

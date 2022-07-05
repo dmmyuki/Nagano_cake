@@ -16,10 +16,13 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
   scope module: :public do
     root to: 'homes#top'
     get 'about' => 'homes#about'
+    resources:addresses, only: [:index, :edit, :create, :update, :destroy]
     resource:customers, only:[:edit, :update] do
       get 'mypage' => 'customers#mypage'
       get 'mypage/edit' => 'customers#edit'
       patch 'mypage/update' => 'customers#update'
+      get 'unsubscribe' => 'customers#unsubscribe'
+      patch 'withdrawal' => 'customers#withdrawal'
     end
   end
 

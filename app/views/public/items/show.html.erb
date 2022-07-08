@@ -1,0 +1,22 @@
+<section class="container">
+  <div class="row">
+
+    <div class="col-lg-6 my-3">
+      <%= image_tag @item.get_image, size: "350x250" %>
+    </div>
+
+    <div class="col-lg-6 my-3">
+      <p class="font-weight-bold"><%= @item.name %></p>
+      <p><%= @item.introduction %></p>
+      <br>
+      <p class="font-italic"><%= @item.price.to_s(:delmited) %>円(税込)</p>
+
+      <%= form_with model: @cart_item, url: cart_items_path, method: :post do |f| %>
+        <%= f.hidden_field:item_id, :value => @item.id %>
+        <%= f.select:amount, *[1..10] %>
+        <%= f.submit "カートに入れる", class:"btn btn-success" %>
+      <% end %>
+    </div>
+
+  </div>
+</section>

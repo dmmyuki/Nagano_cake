@@ -5,11 +5,7 @@
     </div>
 
     <div class="col-lg-6">
-      <% if @item.image.attached? %>
-        <%= image_tag @item.image, size: "300x300" %>
-      <% else %>
-        <%= image_tag 'no_image', size: "300x300" %>
-      <% end %>
+      <%= image_tag @item.get_image, size: "350x250" %>
     </div>
 
     <div class="col-lg-6">

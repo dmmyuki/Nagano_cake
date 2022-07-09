@@ -1,2 +1,52 @@
-<h1>Public::CartItems#index</h1>
-<p>Find me in app/views/public/cart_items/index.html.erb</p>
+<section class="container">
+
+  <h4 class="my-3 p-3"><span class="bg-light">ショッピングカート</span></h4>
+  <div class="text-right">
+    <%= link_to "カートを空にする", cart_items_path, method: :delete, "data-confirm" => "本当に消しますか?", class:"btn btn-danger my-3" %>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-10 offset-lg-1">
+
+      <table class="table table-bordered">
+        <thead class="bg-light">
+          <tr>
+            <th>商品名</th>
+            <th>単価（税込）</th>
+            <th>数量</th>
+            <th>小計</th>
+            <th></th>
+          </tr>
+        </thead>
+        <% @cart_items.each do |cart_item| %>
+        <% @total_price+=cart_item.subtotal %>
+        <tbody>
+          <tr>
+            <td>
+              <%= image_tag cart_item.item.get_image, size:"50x40" %>
+              <%= cart_item.item.name %>
+            </td>
+            <td><%= cart_item.item.with_tax_price %></td>
+            <td>
+              <%= form_with model: cart_item, url: cart_items_path, method: :post do |f| %>
+                <%= f.select:amount, *[1..10] %>
+                <%= f.submit "変更", class:"btn btn-success" %>
+              <% end %>
+            </td>
+            <td><%= cart_item.subtotal.to_s(:delmited) %></td>
+            <td><%= link_to "削除する", url: cart_item_path(cart_item), method: :delete, "data-confirm" => "本当に消しますか?", class:"btn btn-danger" %></td>
+          </tr>
+        </tbody>
+        <% end %>
+          <tr>
+            <th colspan="3">合計金額</th>
+            <td><%= @total_price.to_s(:delmited) %></td>
+          </tr>
+      </table>
+      <div class="text-center">
+        <%= link_to "買い物を続ける", root_path, class:"btn btn-primary" %>
+        <%= link_to "情報入力に進む", class:"btn btn-success" %>
+      </div>
+    </div>
+  </div>
+</section>

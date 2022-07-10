@@ -1,0 +1,50 @@
+<section class="container">
+
+  <h4 class="my-3"><span class="bg-light">注文情報入力</span></h4>
+
+  <div class="row">
+  <%= form_with model: @order, url: confirm_orders_path, method: :post do |f| %>
+    <div class="col-lg-8">
+      <p>支払方法</p>
+      <div class="form-check">
+        <%= f.radio_button:payment_method, @credit_card %>
+        <%= f.label:payment_method, @credit_card_ja %>
+
+        <%= f.radio_button:payment_method, @transfer %>
+        <%= f.label:payment_method, @transfer_ja %>
+      </div>
+
+      <p>お届け先</p>
+      <div class="form-check">
+        <%= f.radio_button: %>
+        <%= f.label: , "ご自身の住所" %>
+
+        <%= f.radio_button: %>
+        <%= f.label: , "登録済住所から選択" %>
+          <%= f.select: %>
+
+        <%= f.radio_button: %>
+        <%= f.label: , "新しいお届け先" %>
+      </div>
+          <table class="table">
+            <tr>
+              <th><%= f.label:postal_code, "郵便番号（ハイフンなし）" %></th>
+              <td><%= f.text_field:postal_code, placeholedr:"0000000" %></td>
+            </tr>
+            <tr>
+              <th><%= f.label:address, "住所" %></th>
+              <td><%= f.text_field:address, placeholedr:"東京都渋谷区代々木神園町0-0" %></td>
+            </tr>
+            <tr>
+              <th><%= f.label:name, "宛名" %></th>
+              <td><%= f.text_field:name, placeholedr:"令和道子" %></td>
+            </tr>
+          </table>
+    </div>
+
+    <div class="col-lg-10 offset-lg-1">
+      <%= f.submit "確認画面へ進む", class:"btn btn-primary" %>
+    </div>
+  <% end %>
+  </div>
+</section>

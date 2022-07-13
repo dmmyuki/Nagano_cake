@@ -1,0 +1,77 @@
+<section class="container">
+
+  <h4 class="my-3"><span class="bg-light">注文情報確認</span></h4>
+
+  <div class="row">
+
+    <div class="col-lg-7">
+      <table class="table">
+        <thead class="bg-light">
+          <tr>
+            <th>商品名</th>
+            <th>単価（税込）</th>
+            <th>数量</th>
+            <th>小計</th>
+          </tr>
+        </thead>
+        <% @cart_items.each do |cart_item| %>
+        <% @total_price+=(cart_item.item.with_tax_price*cart_item.amount) %>
+        <tbody>
+          <tr>
+            <td>
+              <%= image_tag cart_item.item.get_image, size:"50x40" %>
+              <%= cart_item.item.name %>
+            </td>
+            <td>
+              <%= (cart_item.item.with_tax_price).to_s(:delmited) %>
+            </td>
+            <td>
+              <%= cart_item.amount %>
+            </td>
+            <td>
+              <%= (cart_item.item.with_tax_price*cart_item.amount).to_s(:delmited) %>
+            </td>
+          </tr>
+        </tbody>
+        <% end %>
+      </table>
+    </div>
+
+    <div class="col-lg-3">
+      <table class="table">
+        <tr>
+          <th class="bg-light">送料</th>
+          <td><%= @order.postage %></td>
+        </tr>
+        <tr>
+          <th class="bg-light">商品合計</th>
+          <td><%= @total_price.to_s(:delimited) %></td>
+        </tr>
+        <tr>
+          <th class="bg-light">請求金額</th>
+          <td><%= (@order.postage+@total_price).to_s(:delimited) %></td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="col-lg-8">
+      <p>支払方法</p>
+      <%= @order.payment_method_i18n %><br>
+
+      <p>お届け先</p>
+      <p><%= @order.address_display %></p>
+    </div>
+
+    <div class="col-lg-10">
+      <%= form_with model: @order, url: orders_path, method: :post do |f| %>
+        <%= f.hidden_field:destination_postal_code %>
+        <%= f.hidden_field:destination_address %>
+        <%= f.hidden_field:destination_name %>
+        <%= f.hidden_field:payment_method %>
+        <%= f.hidden_field:total_price, value: @total_price+@order.postage %>
+        <%= f.submit "注文を確定する", class:"btn btn-success" %>
+      <% end %>
+    </div>
+
+  </div>
+</section>

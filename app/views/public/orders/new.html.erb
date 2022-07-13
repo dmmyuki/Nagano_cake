@@ -34,16 +34,16 @@
       </div>
           <table class="table table-borderless ml-3">
             <tr>
-              <th class="text-nowrap font-weight-normal"><%= f.label:postal_code, "郵便番号（ハイフンなし）" %></th>
-              <td><%= f.text_field:postal_code, placeholedr:"0000000" %></td>
+              <th class="text-nowrap font-weight-normal"><%= f.label:destination_postal_code, "郵便番号（ハイフンなし）" %></th>
+              <td><%= f.text_field:destination_postal_code, placeholedr:"0000000" %></td>
             </tr>
             <tr>
-              <th class="font-weight-normal"><%= f.label:address, "住所" %></th>
-              <td><%= f.text_field:address, placeholedr:"東京都渋谷区代々木神園町0-0" %></td>
+              <th class="font-weight-normal"><%= f.label:destination_address, "住所" %></th>
+              <td><%= f.text_field:destination_address, placeholedr:"東京都渋谷区代々木神園町0-0" %></td>
             </tr>
             <tr>
-              <th class="font-weight-normal"><%= f.label:name, "宛名" %></th>
-              <td><%= f.text_field:name, placeholedr:"令和道子" %></td>
+              <th class="font-weight-normal"><%= f.label:destination_name, "宛名" %></th>
+              <td><%= f.text_field:destination_name, placeholedr:"令和道子" %></td>
             </tr>
           </table>
     </div>

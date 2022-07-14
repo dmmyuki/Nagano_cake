@@ -18,12 +18,11 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
     get 'about' => 'homes#about'
     resources:addresses, only: [:index, :edit, :create, :update, :destroy]
     resources:items, only:[:index, :show]
-    resource:cart_items, only:[:index, :create, :update, :destroy] do
-      delete 'destroy_all' => 'cart_items#destroy_all'
-    end
-    resource:orders, only:[:new, :index, :show] do
-      post 'confirm' => 'orders#confirm'
-    end
+    delete 'cart_items/destroy_all' => 'cart_items#destroy_all'
+    resources:cart_items, only:[:index, :create, :update, :destroy]
+    post 'orders/confirm' => 'orders#confirm'
+    get 'orders/complete' => 'orders#complete'
+    resources:orders, only:[:index, :new, :show, :create]
     resource:customers, only:[:edit, :update] do
       get 'mypage' => 'customers#mypage'
       get 'mypage/edit' => 'customers#edit'

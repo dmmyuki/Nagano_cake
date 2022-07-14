@@ -12,7 +12,7 @@
       <p class="font-italic"><%= @item.with_tax_price.to_s(:delmited) %>円(税込)</p>
 
       <%= form_with model: @cart_item, url: cart_items_path, method: :post do |f| %>
-        <%= f.hidden_field:item_id, :value => @item.id %>
+        <%= f.hidden_field:item_id, value: @item.id %>
         <%= f.select:amount, *[1..10] %>
         <%= f.submit "カートに入れる", class:"btn btn-success" %>
       <% end %>

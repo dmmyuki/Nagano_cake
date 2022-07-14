@@ -5,7 +5,7 @@
   <div class="row">
 
     <div class="col-lg-7">
-      <table class="table">
+      <table class="table table-bordered">
         <thead class="bg-light">
           <tr>
             <th>商品名</th>
@@ -38,7 +38,7 @@
     </div>
 
     <div class="col-lg-3">
-      <table class="table">
+      <table class="table table-bordered">
         <tr>
           <th class="bg-light">送料</th>
           <td><%= @order.postage %></td>
@@ -55,20 +55,24 @@
     </div>
 
     <div class="col-lg-8">
-      <p>支払方法</p>
-      <%= @order.payment_method_i18n %><br>
+      <p>
+        <span class="font-weight-bold">支払方法</span>
+        <%= @order.payment_method_i18n %>
+      </p>
 
-      <p>お届け先</p>
-      <p><%= @order.address_display %></p>
+      <p>
+        <span class="font-weight-bold">お届け先</span>
+        <%= @order.address_display %>
+      </p>
     </div>
 
     <div class="col-lg-10">
       <%= form_with model: @order, url: orders_path, method: :post do |f| %>
-        <%= f.hidden_field:destination_postal_code %>
-        <%= f.hidden_field:destination_address %>
-        <%= f.hidden_field:destination_name %>
-        <%= f.hidden_field:payment_method %>
-        <%= f.hidden_field:total_price, value: @total_price+@order.postage %>
+        <%= f.hidden_field:address_display, value: @order.address_display %>
+        <%#= f.hidden_field:destination_address, value: @order.destination_address %>
+        <%#= f.hidden_field:destination_name, value: @order.destination_name %>
+        <%= f.hidden_field:payment_method, value: @order.payment_method %>
+        <%= f.hidden_field:total_price, value: @order.postage+@total_price %>
         <%= f.submit "注文を確定する", class:"btn btn-success" %>
       <% end %>
     </div>

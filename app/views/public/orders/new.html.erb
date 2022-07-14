@@ -3,7 +3,7 @@
   <h4 class="my-3"><span class="bg-light">注文情報入力</span></h4>
 
   <div class="row">
-  <%= form_with model: @order, url: confirm_orders_path, method: :post do |f| %>
+  <%= form_with model: @order, url: orders_confirm_path, method: :post do |f| %>
     <div class="col-lg-10">
       <p>支払方法</p>
       <div class="form-check">

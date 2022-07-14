@@ -3,12 +3,6 @@ class Public::OrdersController < ApplicationController
     @order=Order.new
   end
 
-  def index
-  end
-
-  def show
-  end
-
   def confirm
     @cart_items=current_customer.cart_items
     @total_price=0
@@ -17,7 +11,7 @@ class Public::OrdersController < ApplicationController
     if params[:order][:select_address]=="0"
       @order.destination_postal_code=current_customer.postal_code
       @order.destination_address=current_customer.address
-      @order.destination_name=current_customer.first_name + current_customer.last_name
+      @order.destination_name=current_customer.last_name + current_customer.first_name
     elsif params[:order][:select_address]=="1"
       @address=Address.find(params[:order][:address_id])
       @order.destination_postal_code=@address.postal_code
@@ -28,6 +22,32 @@ class Public::OrdersController < ApplicationController
       @order.destination_address=params[:order][:address]
       @order.destination_name=params[:order][:name]
     end
+  end
+
+  def create
+    @order=Order.new(order_params)
+    @order.save
+    @cart_items=current_customer.cart_items.all
+    @cart_items.each do |cart_item|
+      @order_detail=OrderDetail.new
+      @order_detail.order_id=@order.id
+      @order_detail.item_id=cart_item.item.id
+      @order_detail.amount=cart_item.amount
+      @order_detail.tax_price=cart_item.item.with_tax_price
+      @order_detail.save
+    end
+    @cart_items.destroy_all
+    redirect_to orders_complete_path
+  end
+
+  def complete
+  end
+
+  def index
+    @orders=current_customer.orders.all
+  end
+
+  def show
   end
 
   private

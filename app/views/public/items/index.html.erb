@@ -14,7 +14,7 @@
                   <%= link_to item.name, item_path(item) %>
                 </div>
                 <div class="card-text">
-                  <%= item.with_tax_price.to_s(:delmited) %>円
+                  <%= (item.with_tax_price).to_s(:delmited) %>円
                 </div>
               </div>
           </div>

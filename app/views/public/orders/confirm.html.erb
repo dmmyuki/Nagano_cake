@@ -15,7 +15,7 @@
           </tr>
         </thead>
         <% @cart_items.each do |cart_item| %>
-        <% @total_price+=(cart_item.item.with_tax_price*cart_item.amount) %>
+        <% @order.charge+=(cart_item.item.with_tax_price*cart_item.amount) %>
         <tbody>
           <tr>
             <td>
@@ -45,11 +45,11 @@
         </tr>
         <tr>
           <th class="bg-light">商品合計</th>
-          <td><%= @total_price.to_s(:delimited) %></td>
+          <td><%= (@order.charge).to_s(:delimited) %></td>
         </tr>
         <tr>
           <th class="bg-light">請求金額</th>
-          <td><%= (@order.postage+@total_price).to_s(:delimited) %></td>
+          <td><%= (@order.postage+@order.charge).to_s(:delimited) %></td>
         </tr>
       </table>
     </div>
@@ -72,7 +72,7 @@
         <%#= f.hidden_field:destination_address, value: @order.destination_address %>
         <%#= f.hidden_field:destination_name, value: @order.destination_name %>
         <%= f.hidden_field:payment_method, value: @order.payment_method %>
-        <%= f.hidden_field:total_price, value: @order.postage+@total_price %>
+        <%= f.hidden_field:charge, value: @order.postage+@order.charge %>
         <%= f.submit "注文を確定する", class:"btn btn-success" %>
       <% end %>
     </div>

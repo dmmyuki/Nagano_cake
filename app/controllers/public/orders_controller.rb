@@ -5,9 +5,9 @@ class Public::OrdersController < ApplicationController
 
   def confirm
     @cart_items=current_customer.cart_items
-    @total_price=0
     @order=Order.new(order_params)
     @order.postage=800
+    @order.charge=0
     if params[:order][:select_address]=="0"
       @order.destination_postal_code=current_customer.postal_code
       @order.destination_address=current_customer.address
@@ -48,6 +48,8 @@ class Public::OrdersController < ApplicationController
   end
 
   def show
+    @order=Order.find(params[:id])
+    @order_details=@order.order_details
   end
 
   private

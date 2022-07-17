@@ -68,10 +68,11 @@
 
     <div class="col-lg-10">
       <%= form_with model: @order, url: orders_path, method: :post do |f| %>
-        <%= f.hidden_field:address_display, value: @order.address_display %>
-        <%#= f.hidden_field:destination_address, value: @order.destination_address %>
-        <%#= f.hidden_field:destination_name, value: @order.destination_name %>
+        <%= f.hidden_field:destination_postal_code, value: @order.destination_postal_code %>
+        <%= f.hidden_field:destination_address, value: @order.destination_address %>
+        <%= f.hidden_field:destination_name, value: @order.destination_name %>
         <%= f.hidden_field:payment_method, value: @order.payment_method %>
+        <%= f.hidden_field:postage, value: @order.postage %>
         <%= f.hidden_field:charge, value: @order.postage+@order.charge %>
         <%= f.submit "注文を確定する", class:"btn btn-success" %>
       <% end %>

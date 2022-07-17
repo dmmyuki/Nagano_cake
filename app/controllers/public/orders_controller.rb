@@ -26,6 +26,7 @@ class Public::OrdersController < ApplicationController
 
   def create
     @order=Order.new(order_params)
+    @order.customer_id=current_customer.id
     @order.save
     @cart_items=current_customer.cart_items.all
     @cart_items.each do |cart_item|
@@ -37,7 +38,7 @@ class Public::OrdersController < ApplicationController
       @order_detail.save
     end
     @cart_items.destroy_all
-    redirect_to orders_complete_path
+    redirect_to complete_orders_path
   end
 
   def complete
@@ -54,6 +55,6 @@ class Public::OrdersController < ApplicationController
 
   private
   def order_params
-    params.require(:order).permit(:payment_method, :destination_postal_code, :destination_address, :destination_name)
+    params.require(:order).permit(:payment_method, :destination_postal_code, :destination_address, :destination_name, :postage, :charge)
   end
 end

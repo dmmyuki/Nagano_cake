@@ -3,7 +3,7 @@
   <h4 class="my-3"><span class="bg-light">注文履歴一覧</span></h4>
 
   <div class="row">
-    <div class="col-lg-10 offset-lg-1">
+    <div class="col-lg-12">
       <table class="table table-bordered">
         <thead class="bg-light">
           <tr>
@@ -22,7 +22,7 @@
             <% order.order_details.each do |order_detail| %>
             <td><%= order_detail.item.name %></td>
             <% end %>
-            <td><%= order.total_price.to_s(:delimited) %></td>
+            <td><%= order.charge.to_s(:delimited) %></td>
             <td><%= link_to "表示する", order_path(order), class:"btn btn-primary" %></td>
           </tr>
         </tbody>

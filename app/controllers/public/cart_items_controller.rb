@@ -1,4 +1,7 @@
 class Public::CartItemsController < ApplicationController
+
+  before_action :authenticate_customer!
+
   def index
     # ログイン中会員のカート
     @cart_items=current_customer.cart_items

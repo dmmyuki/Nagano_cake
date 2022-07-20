@@ -26,7 +26,7 @@
       <table class="table table-bordered">
         <tr>
           <th class="bg-light">商品合計</th>
-          <td><%= @order.charge %></td>
+          <td><%= (@order.charge-@order.postage).to_s(:delmited) %></td>
         </tr>
         <tr>
           <th class="bg-light">配送料</th>
@@ -34,7 +34,7 @@
         </tr>
         <tr>
           <th class="bg-light font-weight-bold">ご請求金額</th>
-          <td><%= @order.postage+@order.charge %></td>
+          <td><%= (@order.charge).to_s(:delmited) %></td>
         </tr>
       </table>
     </div>
@@ -54,9 +54,9 @@
         <tbody>
           <tr>
             <td><%= order_detail.item.name %></td>
-            <td><%= order_detail.tax_price %></td>
+            <td><%= (order_detail.tax_price).to_s(:delmited) %></td>
             <td><%= order_detail.amount %></td>
-            <td><%= order_detail.tax_price*order_detail.amount %></td>
+            <td><%= (order_detail.tax_price*order_detail.amount).to_s(:delmited) %></td>
           </tr>
         </tbody>
         <% end %>

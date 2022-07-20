@@ -28,12 +28,12 @@
             </td>
             <td><%= (cart_item.item.with_tax_price).to_s(:delmited) %></td>
             <td>
-              <%= form_with model: cart_item, url: cart_items_path, method: :post do |f| %>
+              <%= form_with model: cart_item do |f| %>
                 <%= f.select:amount, *[1..10] %>
                 <%= f.submit "変更", class:"btn btn-success" %>
               <% end %>
             </td>
-            <td><%= cart_item.subtotal.to_s(:delmited) %></td>
+            <td><%= (cart_item.subtotal).to_s(:delmited) %></td>
             <td><%= link_to "削除する", cart_items_path(cart_item), method: :delete, "data-confirm" => "本当に消しますか?", class:"btn btn-danger" %></td>
           </tr>
         </tbody>
@@ -45,7 +45,9 @@
       </table>
       <div class="text-center">
         <%= link_to "買い物を続ける", root_path, class:"btn btn-primary" %>
-        <%= link_to "情報入力に進む", new_order_path, class:"btn btn-success" %>
+        <% if @cart_items.count != 0 %>
+          <%= link_to "情報入力に進む", new_order_path, class:"btn btn-success" %>
+        <% end %>
       </div>
     </div>
   </div>

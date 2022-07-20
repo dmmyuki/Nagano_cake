@@ -10,6 +10,7 @@
             <th scope="col">会員ID</th>
             <th scope="col">氏名</th>
             <th scope="col">メールアドレス</th>
+            <th scope="col">ステータス</th>
           </tr>
         </thead>
         <tbody>
@@ -18,6 +19,13 @@
               <td><%= customer.id %></td>
               <td><%= link_to customer.full_name, admin_customer_path(customer) %></td>
               <td><%= customer.email %></td>
+              <td>
+                <% if customer.is_acive? == true %>
+    	            <p class="text-danger">退会</p>
+				        <% else %>
+				          <p class="text-success">有効</p>
+				        <% end %>
+              </td>
             </tr>
           <% end %>
         </tbody>

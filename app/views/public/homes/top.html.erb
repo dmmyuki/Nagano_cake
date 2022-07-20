@@ -22,10 +22,10 @@
     <% @items.each do |item| %>
       <div class="col">
         <div class="card">
-        <%= image_tag item.image, size:"100x100", class:"card-img-top" %>
+        <%= link_to image_tag(item.image, size:"200x150"), item_path(item), class:"card-img-top text-center" %>
           <div class="card-body">
             <div class="card-title">
-              <%= link_to item.name, item_path(item) %>
+              <%= item.name %>
             </div>
             <div class="card-text">
               <%= (item.price*1.1).floor.to_s(:delmited) %>円
